@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+
+from selenium import webdriver
+from selenium.webdriver.common.proxy import Proxy, ProxyType
+
+"""
+profile=webdriver.FirefoxOptions()
+#设置代理服务器
+profile.set_preference('network.proxy.type', 1)
+profile.set_preference('network.proxy.http',"27.22.85.58")#IP为你的代理服务器地址:如‘127.0.0.0’，字符串类型
+profile.set_preference('network.proxy.http_port', 8100)  #PORT为代理服务器端口号:如，9999，整数类型
+browser=webdriver.Firefox(options=profile)
+browser.get("https://www.cman.jp/network/support/go_access.cgi")
+print(browser.page_source)
+
+# 退出，清除浏览器缓存
+#browser.quit()"""
+options = webdriver.FirefoxOptions()
+proxy = "14.126.30.69:8888"
+#options.add_argument("--headless")
+firefox_capabilities = webdriver.DesiredCapabilities.FIREFOX
+firefox_capabilities['marionette'] = True
+
+firefox_capabilities['proxy'] = {
+    "proxyType": "MANUAL",
+    "httpProxy": proxy,
+    "sslProxy": proxy
+}
+
+driver = webdriver.Firefox(options=options, capabilities=firefox_capabilities)
+driver.get("https://www.ugtop.com/spill.shtml")
+print(driver.page_source)
